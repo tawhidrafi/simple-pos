@@ -9,6 +9,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\VariantAttribiuteController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,5 +31,5 @@ Route::get('/brands', [BrandController::class, 'index'])->name('Brand.index');
 Route::get('/categories', [CategoryController::class, 'index'])->name('Category.index');
 Route::get('/groups', [GroupController::class, 'index'])->name('Group.index');
 Route::get('/inventory', [InventoryController::class, 'index'])->name('Inventory.index');
-Route::get('/units', [InventoryController::class, 'index'])->name('Unit.index');
+Route::get('/units', [UnitController::class, 'index'])->name('Unit.index');
 Route::get('/variant-attribute', [VariantAttribiuteController::class, 'index'])->name('VariantAttribiute.index');
