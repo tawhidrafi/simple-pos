@@ -28,6 +28,7 @@ Route::get('/customers', [CustomerController::class, 'index'])->name('Customer.i
 Route::get('/suppliers', [SupplierController::class, 'index'])->name('Supplier.index');
 Route::get('/products', [ProductController::class, 'index'])->name('Product.index');
 Route::get('/brands', [BrandController::class, 'index'])->name('Brand.index');
+Route::post('/brands', [BrandController::class, 'store'])->name('Brand.store');
 Route::get('/categories', [CategoryController::class, 'index'])->name('Category.index');
 Route::get('/groups', [GroupController::class, 'index'])->name('Group.index');
 Route::get('/inventory', [InventoryController::class, 'index'])->name('Inventory.index');
