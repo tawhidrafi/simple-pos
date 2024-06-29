@@ -6,23 +6,25 @@
     <section class="py-4">
         @extends('layout.nav')
         <!-- container -->
+        <!-- Modal -->
+        @extends('layout.successModal')
         <!-- FORM -->
         <div class="p-4 sm:ml-64 mt-1">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg">
                 <h2 class="mb-4 text-xl font-bold text-gray-900">Add a new Category</h2>
-                <form enctype="multipart/form-data" action="#" method="">
+                <form enctype="multipart/form-data" action=" {{ route('Category.store') }}" method="POST">
                     @csrf
-                    @method('')
+                    @method('post')
                     <div class="flex flex-wrap">
                         <div class="w-1/3 mb-4 mr-4">
-                            <label for="categoryName" class="block mb-2 text-sm font-medium text-gray-900">Brand
+                            <label for="categoryName" class="block mb-2 text-sm font-medium text-gray-900">Category
                                 Name</label>
-                            <input value="" type="text" name="categoryName" id="categoryName"
+                            <input value="{{ old('title') }}" type="text" name="title" id="title"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Category Name">
-                            @error('categoryName')
+                            @error('title')
                                 <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-                                    <span class="font-medium"></span>
+                                    <span class="font-medium">{{ $message }}</span>
                                 </div>
                             @enderror
                         </div>
@@ -51,14 +53,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4">
-                                    Laptop
-                                </td>
-                                <td class="px-6 py-4">
-                                    Edit | Delete
-                                </td>
-                            </tr>
+                            @foreach ($categories as $category)
+                                <tr class="bg-white border-b">
+                                    <td class="px-6 py-4">
+                                        {{ $category->title }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Edit |
+                                        <form action="{{ route('Category.destroy', $category->id) }}" method="POST"
+                                            class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-sm font-medium text-red-500">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -66,6 +76,7 @@
         </div>
     </section>
 
+    @extends('layout.successModalScript')
 </body>
 
 </html>

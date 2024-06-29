@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('address');
-            $table->string('customer_group');
             $table->bigInteger('tin')->unique();
             $table->timestamps();
         });

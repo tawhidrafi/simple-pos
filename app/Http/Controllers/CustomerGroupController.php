@@ -10,33 +10,30 @@ class CustomerGroupController extends Controller
 {
     public function index()
     {
-        return view('Contact.CustomerGroup.index');
-    }
-    public function createView()
-    {
-        return view('Contact.CustomerGroup.create');
+        // Fetch all suppliers from the database
+        $customer_groups = CustomerGroup::all();
+
+        // Pass data to the view and return it
+        return view('Contact.CustomerGroup.index', compact('customer_groups'));
     }
     public function store(Request $request)
     {
-        $rules = [
+        // Validate the request
+        $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'discount' => 'required|min:0',
             'is_default' => 'required',
-        ];
+        ]);
 
-        $validator = Validator::make($request->all(), $rules);
+        // If validation passes, create a new supplier
+        $customer_groups = CustomerGroup::create([
+            'title' => $validatedData['title'],
+            'discount' => $validatedData['discount'],
+            'is_default' => $validatedData['is_default'],
+        ]);
 
-        if ($validator->fails()) {
-            return redirect()->route('CustomerGroup.create')->withInput()->withErrors($validator);
-        }
-
-        $customerGroup = new CustomerGroup();
-        $customerGroup->title = $request->title;
-        $customerGroup->discount = $request->discount;
-        $customerGroup->is_default = $request->is_default;
-        $customerGroup->save();
-
-        return redirect()->route('CustomerGroup.index')->with('success', 'New Group Created Successfully');
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'New Group added successfully!');
     }
     public function editView($id)
     {
@@ -48,6 +45,10 @@ class CustomerGroupController extends Controller
     }
     public function delete($id)
     {
+        $customer_group = CustomerGroup::findOrFail($id);
 
+        $customer_group->delete();
+
+        return redirect()->route('CustomerGroup.index')->with('success', 'Group deleted successfully.');
     }
 }

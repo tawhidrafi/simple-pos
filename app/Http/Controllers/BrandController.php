@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brands;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -11,25 +11,25 @@ class BrandController extends Controller
     //
     public function index()
     {
-        return view('Product.Brand.index');
+        $brands = Brand::all();
+
+        // Pass data to the view and return it
+        return view('Product.Brand.index', compact('brands'));
     }
     public function store(Request $request)
     {
-        $rules = [
-            'title' => 'required|min:5'
-        ];
-        $validator = Validator::make($request->all(), $rules);
+        // Validate the request
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:100'
+        ]);
 
-        if ($validator->fails()) {
-            return redirect()->route('Brand.index')->withInput()->withErrors($validator);
-        }
+        // If validation passes, create a new supplier
+        $supplier = Brand::create([
+            'title' => $validatedData['title'],
+        ]);
 
-        $brand = new Brands();
-        $brand->title = $request->title;
-
-        $brand->save();
-
-        return redirect()->route('Brand.index')->with('success', 'Brand Created Succesfully');
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Brand added successfully!');
     }
     public function editView($id)
     {
@@ -41,6 +41,10 @@ class BrandController extends Controller
     }
     public function delete($id)
     {
+        $brand = Brand::findOrFail($id); // Find supplier by ID
 
+        $brand->delete(); // Delete the supplier
+
+        return redirect()->route('Brand.index')->with('success', 'Brand deleted successfully.');
     }
 }

@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CustomerGroup extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+
+    protected $fillable = ['title'];
+
     public function customers()
     {
         return $this->hasMany(Customer::class);

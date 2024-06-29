@@ -6,6 +6,8 @@
     <section class="py-4">
         @extends('layout.nav')
         <!-- container -->
+        <!-- Modal -->
+        @extends('layout.successModal')
         <!-- FORM -->
         <div class="p-4 sm:ml-64 mt-1">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg">
@@ -51,14 +53,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4">
-                                    Apple
-                                </td>
-                                <td class="px-6 py-4">
-                                    Edit | Delete
-                                </td>
-                            </tr>
+                            @foreach ($brands as $brand)
+                                <tr class="bg-white border-b">
+                                    <td class="px-6 py-4">
+                                        {{ $brand->title }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Edit |
+                                        <form action="{{ route('Brand.destroy', $brand->id) }}" method="POST"
+                                            class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-sm font-medium text-red-500">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -66,6 +76,7 @@
         </div>
     </section>
 
+    @extends('layout.successModalScript')
 </body>
 
 </html>

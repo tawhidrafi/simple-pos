@@ -5,50 +5,51 @@
 
     <section class="py-4">
         @extends('layout.nav')
+        <!-- Modal -->
+        @extends('layout.successModal')
         <!-- container -->
         <!-- FORM -->
         <div class="p-4 sm:ml-64 mt-1">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
                 <h2 class="mb-4 text-xl font-bold text-gray-900">Add a new group for customers</h2>
-                <form enctype="multipart/form-data" action="#" method="">
+                <form enctype="multipart/form-data" action="{{ route('CustomerGroup.store') }}" method="POST">
                     @csrf
-                    @method('')
+                    @method('post')
                     <div class="flex flex-wrap">
                         <div class="w-1/3 mb-4 mr-4">
                             <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Customer Group
                                 Name</label>
-                            <input value="" type="text" name="title" id="title"
+                            <input value="{{ old('title') }}" type="text" name="title" id="title"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Group Name">
-                            @error('')
+                            @error('title')
                                 <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-                                    <span class="font-medium"></span>
+                                    <span class="font-medium">{{ $message }}</span>
                                 </div>
                             @enderror
                         </div>
                         <div class="w-1/3 mb-4 mr-4">
                             <label for="discount" class="block mb-2 text-sm font-medium text-gray-900">Discount</label>
-                            <input value="" type="number" name="discount" id="discount"
+                            <input value="{{ old('discount') }}" type="number" name="discount" id="discount"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Discount. Default is 0">
-                            @error('')
+                            @error('discount')
                                 <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-                                    <span class="font-medium"></span>
+                                    <span class="font-medium">{{ $message }}</span>
                                 </div>
                             @enderror
                         </div>
                         <div class="w-1/3 mb-4">
-                            <label for="is_default"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select any
+                            <label for="is_default" class="block mb-2 text-sm font-medium text-gray-900">Select any
                                 Group</label>
                             <select id="is_default" name="is_default"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                 <option value="yes">Yes</option>
                                 <option value="no" selected>No</option>
                             </select>
-                            @error('')
+                            @error('is_default')
                                 <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-                                    <span class="font-medium"></span>
+                                    <span class="font-medium">{{ $message }}</span>
                                 </div>
                             @enderror
                         </div>
@@ -81,17 +82,27 @@
                         </thead>
                         <tbody>
                             <tr class="bg-white border-b">
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    General
-                                </th>
-                                <td class="px-6 py-4">
-                                    5%
-                                </td>
-                                <td class="px-6 py-4">
-                                    No
-                                </td>
-                            </tr>
+                                @foreach ($customer_groups as $customer_group)
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                            {{ $customer_group->title }}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            {{ $customer_group->discount }} %
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $customer_group->is_default }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            Edit |
+                                            <form action="{{ route('CustomerGroup.destroy', $customer_group->id) }}"
+                                                method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-sm font-medium text-red-500">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -99,6 +110,7 @@
         </div>
     </section>
 
+    @extends('layout.successModalScript')
 </body>
 
 </html>
