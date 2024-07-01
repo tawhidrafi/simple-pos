@@ -12,9 +12,7 @@ class CustomerController extends Controller
     {
         $customerGroups = CustomerGroup::all();
         $customers = Customer::all();
-
         return view('Contact.Customer.index', compact('customerGroups', 'customers'));
-
     }
     public function store(Request $request)
     {
@@ -28,9 +26,7 @@ class CustomerController extends Controller
             'customer_group_id' => 'required|exists:customer_groups,id',
             'tin' => 'required|string|max:20|unique:suppliers,tin',
         ]);
-
         $customer = Customer::create($validatedData);
-
         return redirect()->back()->with('success', 'Customer added successfully!');
     }
     public function editView($id)
@@ -44,9 +40,7 @@ class CustomerController extends Controller
     public function delete($id)
     {
         $customer = Customer::findOrFail($id);
-
         $customer->delete();
-
         return redirect()->route('Customer.index')->with('success', 'Customer deleted successfully.');
     }
 }

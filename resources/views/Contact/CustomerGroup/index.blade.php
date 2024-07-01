@@ -2,11 +2,10 @@
 
 <body>
     @section('title', 'Customer Groups')
-
     <section class="py-4">
-        @extends('layout.nav')
+        @include('layout.nav')
         <!-- Modal -->
-        @extends('layout.successModal')
+        @include('layout.successModal')
         <!-- container -->
         <!-- FORM -->
         <div class="p-4 sm:ml-64 mt-1">
@@ -109,8 +108,7 @@
             </div>
         </div>
     </section>
-
-    @extends('layout.successModalScript')
+    @include('layout.successModalScript')
 </body>
 
 </html>
