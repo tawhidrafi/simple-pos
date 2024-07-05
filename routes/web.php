@@ -10,7 +10,6 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
-use App\Http\Controllers\VariantAttribiuteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/welcome', function () {
@@ -49,8 +48,6 @@ Route::get('/units', [UnitController::class, 'index'])->name('Unit.index');
 Route::post('/units', [UnitController::class, 'store'])->name('Unit.store');
 Route::delete('/units/{unit}', [UnitController::class, 'delete'])->name('Unit.destroy');
 
-Route::get('/variant-attribute', [VariantAttribiuteController::class, 'index'])->name('VariantAttribiute.index');
-Route::post('/variant-attribute', [VariantAttribiuteController::class, 'store'])->name('VariantAttribiute.store');
-Route::delete('/variant-attribute/{attribute}', [VariantAttribiuteController::class, 'delete'])->name('VariantAttribiute.destroy');
-
 Route::get('/products', [ProductController::class, 'index'])->name('Product.index');
+Route::post('/products', [ProductController::class, 'store'])->name('Product.store');
+Route::delete('/products/{product}', [ProductController::class, 'delete'])->name('Product.destroy');
