@@ -15,8 +15,8 @@ class UnitController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:100',
-            'shortName' => 'required|string|max:100',
+            'title' => 'required|string|max:100',
+            'shortTitle' => 'required|string|max:100',
         ]);
         $unit = Unit::create($validatedData);
         return redirect()->back()->with('success', 'Unit added successfully!');

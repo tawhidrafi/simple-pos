@@ -17,7 +17,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $units = Unit::all();
         $groups = Group::all();
-        $products = Product::all();
+        $products = Product::with(['category', 'brand', 'group', 'unit'])->get();
         return view('Product.index', compact('brands', 'categories', 'groups', 'units', 'products'));
     }
     public function store(Request $request)
@@ -30,7 +30,7 @@ class ProductController extends Controller
             'initial_quantity' => 'required|integer',
             'sell_price' => 'required|numeric',
             'purchase_price' => 'required|numeric',
-            'tax' => 'required|integer',
+            'vat' => 'required|integer',
             'barcode' => 'required|unique:products,barcode',
             'category_id' => 'required|exists:categories,id',
             'brand_id' => 'required|exists:brands,id',

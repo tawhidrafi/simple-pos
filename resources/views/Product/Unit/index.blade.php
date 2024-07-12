@@ -38,10 +38,10 @@
                             @foreach ($units as $unit)
                                 <tr class="bg-white border-b">
                                     <td class="px-6 py-4">
-                                        {{ $unit->name }}
+                                        {{ $unit->title }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $unit->shortName }}
+                                        {{ $unit->shortTitle }}
                                     </td>
                                     <td class="px-6 py-4">
                                         Edit |

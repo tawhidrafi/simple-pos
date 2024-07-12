@@ -3,11 +3,32 @@
 <body>
     @section('title', 'Product | Inventory')
 
-    <section class="py-4">
-        @extends('layout.nav')
+    <section class="py-4 px-8">
         <!-- container -->
+        <div class="p-4">
+            <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg">
+                <nav class="bg-white border-gray-200">
+                    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                            <ul
+                                class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
+                                <li>
+                                    <a href="{{ route('Dashboard.index') }}"
+                                        class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:p-0"
+                                        aria-current="page">Home</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('Product.index') }}"
+                                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">Products</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
         <!-- TABLE -->
-        <div class="p-4 sm:ml-64">
+        <div class="p-4">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg">
                 <h2 class="mb-4 text-xl font-bold text-gray-900">Index List</h2>
 
@@ -26,9 +47,6 @@
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Name
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Variant
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Category
@@ -51,41 +69,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white border-b">
-                                <td scope="col" class="px-6 py-">
-                                    25
+                            @foreach ($products as $product)
+                                <td scope="col" class="px-6 py-4">
+                                    {{ $product->id }}
                                 </td>
                                 <td scope="col" class="px-6 py-4">
-                                    12341234
+                                    {{ $product->sku  }}
                                 </td>
                                 <td scope="col" class="px-6 py-4">
-                                    369369258
+                                    {{ $product->barcode }}
                                 </td>
                                 <td scope="col" class="px-6 py-4">
-                                    New Neck Tie
+                                    {{ $product->name }}
                                 </td>
                                 <td scope="col" class="px-6 py-4">
-
+                                    {{ $product->category->title }}
                                 </td>
                                 <td scope="col" class="px-6 py-4">
-                                    Tie
+                                    {{ $product->group->title }}
                                 </td>
                                 <td scope="col" class="px-6 py-4">
-                                    Tie
+                                    {{ $product->brand->title }}
                                 </td>
                                 <td scope="col" class="px-6 py-4">
-                                    Dunhill
+                                    {{ $product->purchase_price }}
                                 </td>
                                 <td scope="col" class="px-6 py-4">
-                                    $1,800.00
+                                    {{ $product->sell_price }}
                                 </td>
                                 <td scope="col" class="px-6 py-4">
-                                    $2,000.00
+                                    {{ $product->initial_quantity }}
                                 </td>
-                                <td scope="col" class="px-6 py-4">
-                                    100
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

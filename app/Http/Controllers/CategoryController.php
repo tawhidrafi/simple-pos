@@ -10,23 +10,16 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-
-        // Pass data to the view and return it
         return view('Product.Category.index', compact('categories'));
     }
     public function store(Request $request)
     {
-        // Validate the request
         $validatedData = $request->validate([
             'title' => 'required|string|max:100'
         ]);
-
-        // If validation passes, create a new supplier
         $categories = Category::create([
             'title' => $validatedData['title'],
         ]);
-
-        // Redirect back with success message
         return redirect()->back()->with('success', 'Category added successfully!');
     }
     public function editView($id)

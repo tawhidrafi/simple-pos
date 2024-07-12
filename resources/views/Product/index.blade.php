@@ -24,13 +24,10 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    Product Name
-                                </th>
-                                <th scope="col" class="px-6 py-3">
                                     SKU
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Brand
+                                    Product Name
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Category
@@ -39,29 +36,35 @@
                                     Group
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Brand
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Action
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <td scope="col" class="px-6 py-3">
-                                Apple Keyboard
-                            </td>
-                            <td scope="col" class="px-6 py-3">
-                                145415154SDD45
-                            </td>
-                            <td scope="col" class="px-6 py-3">
-                                Apple
-                            </td>
-                            <td scope="col" class="px-6 py-3">
-                                Accesories
-                            </td>
-                            <td scope="col" class="px-6 py-3">
-                                Laptop
-                            </td>
-                            <td scope="col" class="px-6 py-3">
-                                Edit | Delete
-                            </td>
+                            @foreach ($products as $product)
+                                <td scope="col" class="px-6 py-4">
+                                    {{ $product->sku  }}
+                                </td>
+                                <td scope="col" class="px-6 py-4">
+                                    {{ $product->name }}
+                                </td>
+                                <td scope="col" class="px-6 py-4">
+                                    {{ $product->category->title }}
+                                </td>
+                                <td scope="col" class="px-6 py-4">
+                                    {{ $product->group->title }}
+                                </td>
+                                <td scope="col" class="px-6 py-4">
+                                    {{ $product->brand->title }}
+                                </td>
+                                </td>
+                                <td scope="col" class="px-6 py-3">
+                                    Edit | Delete
+                                </td>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

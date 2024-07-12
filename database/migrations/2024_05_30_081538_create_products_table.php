@@ -5,9 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
@@ -24,15 +21,11 @@ return new class extends Migration {
             $table->integer('initial_quantity');
             $table->decimal('sell_price', 8, 2);
             $table->decimal('purchase_price', 8, 2);
-            $table->integer('tax');
+            $table->decimal('vat', 8, 2);
             $table->bigInteger('barcode')->unique();
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('products');

@@ -3,22 +3,22 @@
     @method('post')
     <div class="flex flex-wrap">
         <div class="w-1/3 mb-4 mr-4">
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Unit
+            <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Unit
                 Name</label>
-            <input value="{{ old('name') }}" type="text" name="name" id="name"
+            <input value="{{ old('title') }}" type="text" name="title" id="title"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Unit Name">
-            @error('name')
+            @error('title')
                 @include('layout.form.errorMessage')
             @enderror
         </div>
         <div class="w-1/3 mb-4 mr-4">
-            <label for="shortName" class="block mb-2 text-sm font-medium text-gray-900">Short
+            <label for="shortTitle" class="block mb-2 text-sm font-medium text-gray-900">Short
                 Name</label>
-            <input value="{{ old('shortName') }}" type="text" name="shortName" id="shortName"
+            <input value="{{ old('shortTitle') }}" type="text" name="shortTitle" id="shortTitle"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Short Name">
-            @error('shortName')
+            @error('shortTitle')
                 @include('layout.form.errorMessage')
             @enderror
         </div>
