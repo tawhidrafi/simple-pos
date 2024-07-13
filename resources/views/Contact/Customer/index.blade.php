@@ -36,6 +36,9 @@
                                     Phone
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Group
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Action
                                 </th>
                             </tr>
@@ -57,7 +60,11 @@
                                         {{ $customer->phone }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        Edit |
+                                        {{ $customer->customerGroup->title }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <a href=" {{ route('Customer.edit', $customer->id) }} " type="button" class=text-sm
+                                            font-medium text-red-500">Edit</a> |
                                         <form action="{{ route('Customer.destroy', $customer->id) }}" method="POST"
                                             class="inline">
                                             @csrf

@@ -70,39 +70,42 @@
                         </thead>
                         <tbody>
                             @foreach ($products as $product)
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->id }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->sku  }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->barcode }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->name }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->category->title }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->group->title }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->brand->title }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->purchase_price }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->sell_price }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->initial_quantity }}
-                                </td>
+                                <tr>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->id }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->sku  }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->barcode }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->name }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->category->title }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->group->title }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->brand->title }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->purchase_price }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->sell_price }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->initial_quantity }}
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>

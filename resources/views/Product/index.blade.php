@@ -45,25 +45,34 @@
                         </thead>
                         <tbody>
                             @foreach ($products as $product)
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->sku  }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->name }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->category->title }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->group->title }}
-                                </td>
-                                <td scope="col" class="px-6 py-4">
-                                    {{ $product->brand->title }}
-                                </td>
-                                </td>
-                                <td scope="col" class="px-6 py-3">
-                                    Edit | Delete
-                                </td>
+                                <tr>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->sku  }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->name }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->category->title }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->group->title }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-4">
+                                        {{ $product->brand->title }}
+                                    </td>
+                                    </td>
+                                    <td scope="col" class="px-6 py-3">
+                                        <a href=" {{ route('Product.edit', $product->id) }} " type="button" class=text-sm
+                                            font-medium text-red-500">Edit</a> |
+                                        <form action="{{ route('Product.destroy', $product->id) }}" method="POST"
+                                            class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-sm font-medium text-red-500">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

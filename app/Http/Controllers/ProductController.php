@@ -30,7 +30,7 @@ class ProductController extends Controller
             'initial_quantity' => 'required|integer',
             'sell_price' => 'required|numeric',
             'purchase_price' => 'required|numeric',
-            'vat' => 'required|integer',
+            'vat' => 'required|numeric',
             'barcode' => 'required|unique:products,barcode',
             'category_id' => 'required|exists:categories,id',
             'brand_id' => 'required|exists:brands,id',
@@ -43,16 +43,41 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Product added successfully!');
     }
 
-    public function editView($id)
+    public function edit($id)
     {
-
+        $product = Product::findOrFail($id);
+        $brands = Brand::all();
+        $categories = Category::all();
+        $units = Unit::all();
+        $groups = Group::all();
+        return view('Product.edit', compact('brands', 'categories', 'groups', 'units', 'product'));
     }
-    public function update($id, Request $request)
+    public function update(Request $request, $id)
     {
-
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'sku' => 'required|unique:products,sku,' . $id,
+            'description' => 'nullable|max:255',
+            'product_type' => 'required|string',
+            'initial_quantity' => 'required|integer',
+            'sell_price' => 'required|numeric',
+            'purchase_price' => 'required|numeric',
+            'vat' => 'required|numeric',
+            'barcode' => 'required|unique:products,barcode,' . $id,
+            'category_id' => 'required|exists:categories,id',
+            'brand_id' => 'required|exists:brands,id',
+            'group_id' => 'required|exists:groups,id',
+            'unit_id' => 'required|exists:units,id',
+        ]);
+        $product = Product::findOrFail($id);
+        $product->update($validatedData);
+        return redirect()->route('Product.index')->with('success', 'Product updated successfully!');
     }
+
     public function delete($id)
     {
-
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect()->route('Product.index')->with('success', 'Product deleted successfully.');
     }
 }

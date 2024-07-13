@@ -10,8 +10,8 @@ return new class extends Migration {
         Schema::create('customer_groups', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->decimal('discount', 5, 2)->default(0);
-            $table->string('is_default');
+            $table->decimal('discount', 8, 2)->default(0.00);
+            $table->boolean('is_default')->default(false);
             $table->timestamps();
         });
     }

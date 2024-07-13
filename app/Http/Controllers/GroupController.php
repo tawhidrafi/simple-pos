@@ -20,13 +20,21 @@ class GroupController extends Controller
         $supplier = Group::create($validatedData);
         return redirect()->back()->with('success', 'Group added successfully!');
     }
-    public function editView($id)
+    public function edit($id)
     {
-
+        $group = Group::findOrFail($id);
+        return view('Product.Group.edit', [
+            'group' => $group,
+        ]);
     }
     public function update($id, Request $request)
     {
-
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:100'
+        ]);
+        $group = Group::findOrFail($id);
+        $group->update($validatedData);
+        return redirect()->route('Group.index')->with('success', 'Group updated successfully!');
     }
     public function delete($id)
     {

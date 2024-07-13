@@ -38,7 +38,8 @@
                                         {{ $category->title }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        Edit |
+                                        <a href=" {{ route('Category.edit', $category->id) }} " type="button" class=text-sm
+                                            font-medium text-red-500">Edit</a> |
                                         <form action="{{ route('Category.destroy', $category->id) }}" method="POST"
                                             class="inline">
                                             @csrf

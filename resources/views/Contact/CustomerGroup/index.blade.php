@@ -29,7 +29,7 @@
                         </div>
                         <div class="w-1/3 mb-4 mr-4">
                             <label for="discount" class="block mb-2 text-sm font-medium text-gray-900">Discount</label>
-                            <input value="{{ old('discount') }}" type="number" name="discount" id="discount"
+                            <input value="{{ old('discount') }}" type="number" step="0.01" name="discount" id="discount"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Discount. Default is 0">
                             @error('discount')
@@ -43,8 +43,8 @@
                                 Group</label>
                             <select id="is_default" name="is_default"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                <option value="yes">Yes</option>
-                                <option value="no" selected>No</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                             </select>
                             @error('is_default')
                                 <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
@@ -89,10 +89,15 @@
                                             {{ $customer_group->discount }} %
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $customer_group->is_default }}
+                                            @if ($customer_group->is_default)
+                                                Yes
+                                            @else
+                                                No
+                                            @endif
                                         </td>
                                         <td class="px-6 py-4">
-                                            Edit |
+                                            <a href=" {{ route('CustomerGroup.edit', $customer_group->id) }} " type="button"
+                                                class=text-sm font-medium text-red-500">Edit</a> | |
                                             <form action="{{ route('CustomerGroup.destroy', $customer_group->id) }}"
                                                 method="POST" class="inline">
                                                 @csrf

@@ -38,7 +38,8 @@
                                         {{ $group->title }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        Edit |
+                                        <a href=" {{ route('Group.edit', $group->id) }} " type="button" class=text-sm
+                                            font-medium text-red-500">Edit</a> |
                                         <form action="{{ route('Group.destroy', $group->id) }}" method="POST"
                                             class="inline">
                                             @csrf

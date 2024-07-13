@@ -15,16 +15,26 @@ class CustomerGroupController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'discount' => 'required|min:0',
-            'is_default' => 'required',
+            'title' => 'required|string',
+            'discount' => 'nullable|numeric|min:0|max:10',
+            'is_default' => 'required|boolean',
         ]);
-        $customer_groups = CustomerGroup::create($validatedData);
+        if ($validatedData['is_default']) {
+            CustomerGroup::where('is_default', true)->update(['is_default' => false]);
+        }
+        $customerGroup = CustomerGroup::create([
+            'title' => $validatedData['title'],
+            'discount' => $validatedData['discount'] ?? 0.00,
+            'is_default' => $validatedData['is_default'],
+        ]);
         return redirect()->back()->with('success', 'New Group added successfully!');
     }
-    public function editView($id)
+    public function edit($id)
     {
-
+        $customerGroup = CustomerGroup::findOrFail($id);
+        return view('CustomerGroup.edit', [
+            'customerGroup' => $customerGroup,
+        ]);
     }
     public function update($id, Request $request)
     {

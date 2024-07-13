@@ -22,13 +22,21 @@ class CategoryController extends Controller
         ]);
         return redirect()->back()->with('success', 'Category added successfully!');
     }
-    public function editView($id)
+    public function edit($id)
     {
-
+        $category = Category::findOrFail($id);
+        return view('Product.Category.edit', [
+            'category' => $category,
+        ]);
     }
     public function update($id, Request $request)
     {
-
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:100'
+        ]);
+        $category = Category::findOrFail($id);
+        $category->update($validatedData);
+        return redirect()->route('Category.index')->with('success', 'Category updated successfully!');
     }
     public function delete($id)
     {

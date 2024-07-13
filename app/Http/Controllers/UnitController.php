@@ -21,13 +21,22 @@ class UnitController extends Controller
         $unit = Unit::create($validatedData);
         return redirect()->back()->with('success', 'Unit added successfully!');
     }
-    public function editView($id)
+    public function edit($id)
     {
-
+        $unit = Unit::findOrFail($id);
+        return view('Product.Unit.edit', [
+            'unit' => $unit,
+        ]);
     }
     public function update($id, Request $request)
     {
-
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:100',
+            'shortTitle' => 'required|string|max:100',
+        ]);
+        $unit = Unit::findOrFail($id);
+        $unit->update($validatedData);
+        return redirect()->route('Unit.index')->with('success', 'Unit updated successfully!');
     }
     public function delete($id)
     {

@@ -20,13 +20,21 @@ class BrandController extends Controller
         $supplier = Brand::create($validatedData);
         return redirect()->back()->with('success', 'Brand added successfully!');
     }
-    public function editView($id)
+    public function edit($id)
     {
-
+        $brand = Brand::findOrFail($id);
+        return view('Product.Brand.edit', [
+            'brand' => $brand,
+        ]);
     }
     public function update($id, Request $request)
     {
-
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:100'
+        ]);
+        $brand = Brand::findOrFail($id);
+        $brand->update($validatedData);
+        return redirect()->route('Brand.index')->with('success', 'Brand updated successfully!');
     }
     public function delete($id)
     {

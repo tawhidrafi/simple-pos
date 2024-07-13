@@ -44,7 +44,8 @@
                                         {{ $unit->shortTitle }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        Edit |
+                                        <a href=" {{ route('Unit.edit', $unit->id) }} " type="button" class=text-sm
+                                            font-medium text-red-500">Edit</a> |
                                         <form action="{{ route('Unit.destroy', $unit->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')

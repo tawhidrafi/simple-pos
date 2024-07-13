@@ -1,7 +1,7 @@
 @extends('layout.head')
 
 <body>
-    @section('title', 'Contact | Update Supplier')
+    @section('title', 'Product | Update Category')
 
     <section class="py-4 px-8">
         <!-- container -->
@@ -14,7 +14,7 @@
                             <ul
                                 class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
                                 <li>
-                                    <a href="{{ route('Supplier.index') }}"
+                                    <a href="{{ route('Category.index') }}"
                                         class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:p-0"
                                         aria-current="page">Back to list</a>
                                 </li>
@@ -27,7 +27,7 @@
         <!-- UPDATE FORM -->
         <div class="p-4">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg">
-                @include('layout.updateForm.supplierForm')
+                @include('layout.updateForm.categoryForm')
             </div>
         </div>
     </section>
